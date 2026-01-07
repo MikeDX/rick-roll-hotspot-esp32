@@ -38,10 +38,43 @@ jobs:
           pip install --upgrade pip
           pip install platformio
 
+      - name: Pre-install ESP32-C6 platform (workaround for postinstall issue)
+        run: |
+          # Pre-install the ESP32-C6 community fork platform
+          # Workaround for missing package-postinstall.py script
+          
+          # Create a no-op postinstall script that PlatformIO can find
+          # PlatformIO looks for this in various locations
+          mkdir -p ~/.platformio/penv/bin
+          cat > ~/.platformio/penv/bin/package-postinstall.py << 'EOF'
+          #!/usr/bin/env python3
+          # No-op postinstall script for ESP32-C6 platform workaround
+          import sys
+          sys.exit(0)
+          EOF
+          chmod +x ~/.platformio/penv/bin/package-postinstall.py
+          
+          # Also create in system PATH locations
+          mkdir -p ~/.local/bin /usr/local/bin 2>/dev/null || true
+          cp ~/.platformio/penv/bin/package-postinstall.py ~/.local/bin/ 2>/dev/null || true
+          
+          # Ensure it's in PATH
+          export PATH="$HOME/.platformio/penv/bin:$HOME/.local/bin:$PATH"
+          which package-postinstall.py || echo "Script created but not in PATH"
+          
+          # Now install the platform
+          pio platform install "https://github.com/pioarduino/platform-espressif32/releases/download/54.03.20/platform-espressif32.zip"
+          
+          # Verify platform is usable
+          if [ -d "$HOME/.platformio/platforms/espressif32" ]; then
+            echo "✓ ESP32-C6 platform installed successfully"
+          fi
+
       - name: Build firmware for all boards
         run: |
+          # Ensure Python/scripts are in PATH (including our wrapper)
+          export PATH="$HOME/.local/bin:$HOME/.platformio/penv/bin:$PATH"
           chmod +x scripts/build-web-firmware.sh
-          # Build script continues even if some boards fail (e.g., ESP32-C6 community fork issues)
           ./scripts/build-web-firmware.sh
 
       - name: Setup Pages
