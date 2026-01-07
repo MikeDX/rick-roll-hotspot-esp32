@@ -1,4 +1,4 @@
-# ESP32 Rickroll Captive Portal 🎸
+# ESP32 Rickroll Captive Portal
 
 A harmless prank captive portal that broadcasts a "free wifi" network and serves a full-screen rickroll GIF when users connect. Built with Arduino framework for maximum portability across ESP32 boards.
 
@@ -6,7 +6,7 @@ A harmless prank captive portal that broadcasts a "free wifi" network and serves
 ![PlatformIO](https://img.shields.io/badge/PlatformIO-Ready-orange)
 ![Arduino](https://img.shields.io/badge/Arduino-Framework-green)
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 **This project is for educational and harmless prank purposes only.**
 
@@ -17,7 +17,7 @@ A harmless prank captive portal that broadcasts a "free wifi" network and serves
 
 The author and contributors are not responsible for any misuse of this software. Use at your own risk and in compliance with local laws and regulations.
 
-## 🎯 Features
+## Features
 
 - **Full-screen rickroll** - No welcome messages, just pure rickroll
 - **Instant captive portal** - Triggers immediately when devices connect
@@ -25,14 +25,14 @@ The author and contributors are not responsible for any misuse of this software.
 - **Multi-board compatible** - Supports ESP32, ESP32-S2, ESP32-S3, and ESP32-C6
 - **Arduino framework** - Easy to understand and modify
 
-## 📋 Requirements
+## Requirements
 
 - PlatformIO IDE (VS Code extension) or PlatformIO CLI
 - ESP32 board (any variant)
 - USB cable for programming
 - A rickroll GIF file (included in `data/` directory)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone the Repository
 
@@ -52,7 +52,7 @@ Place your rickroll GIF file in the `data/` directory as `rickroll.gif`. A sampl
 
 ### 4. Build and Upload
 
-**Option A: Web Installer (Easiest) 🌐**
+**Option A: Web Installer (Easiest)**
 
 Flash directly from your browser using our [web installer](https://mikedx.github.io/rick-roll-hotspot-esp32/):
 1. Connect your ESP32 to your computer via USB
@@ -63,7 +63,7 @@ Flash directly from your browser using our [web installer](https://mikedx.github
 
 > **Note:** The web installer is automatically built and deployed via GitHub Actions when code is pushed to the main branch.
 
-**Option B: PlatformIO (Traditional) 🔧**
+**Option B: PlatformIO (Traditional)**
 
 **For ESP32-C6:**
 ```bash
@@ -86,9 +86,9 @@ pio device monitor -e esp32-c6-devkitc-1
 
 1. The ESP32 will create a WiFi network named **"free wifi"** (open, no password)
 2. Connect to it from any device
-3. Open any website - you'll be immediately rickrolled! 🎸
+3. Open any website - you'll be immediately rickrolled!
 
-## 🔧 How It Works
+## How It Works
 
 1. **WiFi Access Point**: Creates an open WiFi network named "free wifi"
 2. **DNS Server**: Intercepts all DNS queries and redirects them to the ESP32
@@ -99,7 +99,7 @@ pio device monitor -e esp32-c6-devkitc-1
 4. **Web Server**: Serves a full-screen HTML page with the rickroll GIF
 5. **Instant Trigger**: DNS server processes requests immediately for fast triggering
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 rick-roll-hotspot-esp32/
@@ -118,7 +118,7 @@ rick-roll-hotspot-esp32/
 └── .gitignore               # Git ignore rules
 ```
 
-## 🎛️ Supported Boards
+## Supported Boards
 
 The project includes multiple build environments in `platformio.ini`:
 
@@ -129,7 +129,7 @@ The project includes multiple build environments in `platformio.ini`:
 | ESP32-S2 | `esp32-s2-saola-1` | ESP32-S2 boards (Saola-1) |
 | ESP32-S3 | `esp32-s3-devkitc-1` | ESP32-S3 boards |
 
-## 🛠️ Customization
+## Customization
 
 ### Change WiFi SSID
 
@@ -147,15 +147,15 @@ const char* ssid = "your-network-name";
 
 Edit the `index_html` constant in `src/main.cpp` to customize the page.
 
-## 📚 Credits & Acknowledgments
+## Credits & Acknowledgments
 
 - **ESP32 Arduino Core**: [espressif/arduino-esp32](https://github.com/espressif/arduino-esp32)
 - **PlatformIO**: [platformio/platformio-core](https://github.com/platformio/platformio-core)
 - **ESP32-C6 Arduino Support**: [pioarduino/platform-espressif32](https://github.com/pioarduino/platform-espressif32) - Community fork enabling Arduino framework support for ESP32-C6
 - **ESP Web Tools**: [esphome/esp-web-tools](https://github.com/esphome/esp-web-tools) - Browser-based firmware installer
-- **Rick Astley**: For the iconic "Never Gonna Give You Up" that started it all 🎸
+- **Rick Astley**: For the iconic "Never Gonna Give You Up" that started it all
 
-## 📝 License
+## License
 
 This project is provided as-is for educational and entertainment purposes. Feel free to modify and use as you wish, but please:
 
@@ -164,7 +164,7 @@ This project is provided as-is for educational and entertainment purposes. Feel 
 - Follow local laws and regulations
 - Don't use for malicious purposes
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Feel free to:
 - Report bugs
@@ -172,7 +172,7 @@ Contributions are welcome! Feel free to:
 - Submit pull requests
 - Share your modifications
 
-## ⚡ Troubleshooting
+## Troubleshooting
 
 **GIF not animating?**
 - Make sure you uploaded the filesystem: `pio run -e <env> --target uploadfs`
@@ -189,7 +189,7 @@ Contributions are welcome! Feel free to:
 - Check that you're using the correct environment for your board
 - Verify all dependencies are installed
 
-## 📞 Support
+## Support
 
 If you encounter issues:
 1. Check the [Issues](https://github.com/MikeDX/rick-roll-hotspot-esp32/issues) page
@@ -198,4 +198,4 @@ If you encounter issues:
 
 ---
 
-**Remember**: This is a harmless prank project. Use responsibly and have fun! 🎉
+**Remember**: This is a harmless prank project. Use responsibly and have fun!

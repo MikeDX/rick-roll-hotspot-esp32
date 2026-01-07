@@ -35,12 +35,12 @@ for env_info in "${ENVIRONMENTS[@]}"; do
     
     # Build firmware and filesystem (continue on error)
     if ! pio run -e "$env"; then
-        echo "  ⚠ Warning: Firmware build failed for $chip ($env), skipping..."
+        echo "  Warning: Firmware build failed for $chip ($env), skipping..."
         continue
     fi
     
     if ! pio run -e "$env" --target buildfs; then
-        echo "  ⚠ Warning: Filesystem build failed for $chip ($env), skipping..."
+        echo "  Warning: Filesystem build failed for $chip ($env), skipping..."
         continue
     fi
     
@@ -92,7 +92,7 @@ BUILT_COUNT=$(ls -1 "$OUTPUT_DIR"/*_firmware.bin 2>/dev/null | wc -l)
 echo "Successfully built firmware for $BUILT_COUNT board(s)"
 
 if [ "$BUILT_COUNT" -eq 0 ]; then
-    echo "⚠ Warning: No firmware files were built!"
+    echo "Warning: No firmware files were built!"
     exit 1
 fi
 
