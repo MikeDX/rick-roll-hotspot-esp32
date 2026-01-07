@@ -41,6 +41,7 @@ jobs:
       - name: Build firmware for all boards
         run: |
           chmod +x scripts/build-web-firmware.sh
+          # Build script continues even if some boards fail (e.g., ESP32-C6 community fork issues)
           ./scripts/build-web-firmware.sh
 
       - name: Setup Pages
