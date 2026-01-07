@@ -6,9 +6,13 @@
 .vscode/ipch
 
 # Build artifacts
-*.bin
 *.elf
 *.map
+*.bin
+
+# Firmware binaries are built by GitHub Actions, don't commit them
+docs/firmware/*.bin
+!docs/firmware/*.json
 
 # ESP-IDF / SDK config (generated files)
 sdkconfig*

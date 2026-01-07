@@ -1,0 +1,18 @@
+{
+  "name": "ESP32 Rickroll Hotspot",
+  "version": "1.0.0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S2",
+      "parts": [
+        { "path": "esp32-s2-saola-1_bootloader.bin", "offset": 4096 },
+        { "path": "esp32-s2-saola-1_partitions.bin", "offset": 32768 },
+        { "path": "esp32-s2-saola-1_boot_app0.bin", "offset": 57344 },
+        { "path": "esp32-s2-saola-1_firmware.bin", "offset": 65536 },
+        { "path": "esp32-s2-saola-1_filesystem.bin", "offset": 1572864 }
+      ]
+    }
+  ]
+}
+

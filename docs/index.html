@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 Rickroll Hotspot - Web Installer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            color: #856404;
+        }
+        
+        .warning strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .install-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .board-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .board-selector label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .board-selector select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            background: white;
+        }
+        
+        .info {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .info li {
+            margin: 5px 0;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        esp-web-install-button {
+            --esp-tools-button-color: #667eea;
+            --esp-tools-button-text-color: white;
+            --esp-tools-button-border-radius: 10px;
+        }
+    </style>
+    <script
+        type="module"
+        src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
+    ></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🎸 ESP32 Rickroll Hotspot</h1>
+        <p class="subtitle">Flash firmware directly from your browser</p>
+        
+        <div class="warning">
+            <strong>⚠️ Disclaimer</strong>
+            This project is for educational and harmless prank purposes only. 
+            Use responsibly and only in controlled environments. Do not use to intercept 
+            or monitor network traffic.
+        </div>
+        
+        <div class="board-selector">
+            <label for="board-select">Select your ESP32 board:</label>
+            <select id="board-select" onchange="updateManifest()">
+                <option value="esp32dev">ESP32 (Standard)</option>
+                <option value="esp32-s2-saola-1">ESP32-S2</option>
+                <option value="esp32-s3-devkitc-1">ESP32-S3</option>
+                <option value="esp32-c6-devkitc-1">ESP32-C6</option>
+            </select>
+        </div>
+        
+        <div class="install-section">
+            <esp-web-install-button id="install-button" manifest="firmware/manifest.json"></esp-web-install-button>
+        </div>
+        
+        <div class="info">
+            <strong>📋 Instructions:</strong>
+            <ul>
+                <li>Connect your ESP32 board to your computer via USB</li>
+                <li>Select your board type above</li>
+                <li>Click the install button and select your ESP32 device</li>
+                <li>Wait for the installation to complete</li>
+                <li>After installation, connect to the "free wifi" network</li>
+                <li>Open any website to be rickrolled! 🎸</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <strong>💡 Tips:</strong>
+            <ul>
+                <li>Make sure you're using Chrome or Edge browser</li>
+                <li>You may need to install USB drivers for your ESP32 board</li>
+                <li>If the install button doesn't appear, make sure you're using HTTPS</li>
+                <li>After flashing, the ESP32 will create a WiFi network named "free wifi"</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>
+                <a href="https://github.com/MikeDX/rick-roll-hotspot-esp32">View on GitHub</a> | 
+                <a href="https://github.com/MikeDX/rick-roll-hotspot-esp32/blob/main/README.md">Documentation</a>
+            </p>
+            <p style="margin-top: 10px;">
+                Powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function updateManifest() {
+            const boardSelect = document.getElementById('board-select');
+            const selectedBoard = boardSelect.value;
+            const installButton = document.getElementById('install-button');
+            
+            // Update manifest based on selected board
+            const manifestUrl = `firmware/manifest-${selectedBoard}.json`;
+            installButton.manifest = manifestUrl;
+        }
+        
+        // Initialize with default board
+        updateManifest();
+    </script>
+</body>
+</html>
+

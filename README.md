@@ -52,6 +52,19 @@ Place your rickroll GIF file in the `data/` directory as `rickroll.gif`. A sampl
 
 ### 4. Build and Upload
 
+**Option A: Web Installer (Easiest) 🌐**
+
+Flash directly from your browser using our [web installer](https://mikedx.github.io/rick-roll-hotspot-esp32/):
+1. Connect your ESP32 to your computer via USB
+2. Visit the web installer page (requires Chrome or Edge)
+3. Select your board type
+4. Click install and follow the prompts
+5. The firmware and filesystem will be flashed automatically!
+
+> **Note:** The web installer is automatically built and deployed via GitHub Actions when code is pushed to the main branch.
+
+**Option B: PlatformIO (Traditional) 🔧**
+
 **For ESP32-C6:**
 ```bash
 # Upload filesystem (contains the GIF)
@@ -66,7 +79,7 @@ pio device monitor -e esp32-c6-devkitc-1
 
 **For other ESP32 boards**, replace `esp32-c6-devkitc-1` with:
 - `esp32dev` - Standard ESP32
-- `esp32-s2-devkitc-1` - ESP32-S2
+- `esp32-s2-saola-1` - ESP32-S2
 - `esp32-s3-devkitc-1` - ESP32-S3
 
 ### 5. Connect and Enjoy
@@ -92,6 +105,12 @@ pio device monitor -e esp32-c6-devkitc-1
 rick-roll-hotspot-esp32/
 ├── data/
 │   └── rickroll.gif          # Your rickroll GIF file
+├── docs/
+│   ├── index.html            # Web installer page
+│   └── firmware/             # Firmware binaries for web flashing
+│       └── manifest.json     # ESP Web Tools manifest
+├── scripts/
+│   └── build-web-firmware.sh # Script to build web firmware
 ├── src/
 │   └── main.cpp              # Main firmware code
 ├── platformio.ini           # PlatformIO configuration
@@ -107,7 +126,7 @@ The project includes multiple build environments in `platformio.ini`:
 |-------|-------------|-------|
 | ESP32-C6 | `esp32-c6-devkitc-1` | Uses community fork for Arduino support |
 | ESP32 | `esp32dev` | Standard ESP32 boards |
-| ESP32-S2 | `esp32-s2-devkitc-1` | ESP32-S2 boards |
+| ESP32-S2 | `esp32-s2-saola-1` | ESP32-S2 boards (Saola-1) |
 | ESP32-S3 | `esp32-s3-devkitc-1` | ESP32-S3 boards |
 
 ## 🛠️ Customization
@@ -133,6 +152,7 @@ Edit the `index_html` constant in `src/main.cpp` to customize the page.
 - **ESP32 Arduino Core**: [espressif/arduino-esp32](https://github.com/espressif/arduino-esp32)
 - **PlatformIO**: [platformio/platformio-core](https://github.com/platformio/platformio-core)
 - **ESP32-C6 Arduino Support**: [pioarduino/platform-espressif32](https://github.com/pioarduino/platform-espressif32) - Community fork enabling Arduino framework support for ESP32-C6
+- **ESP Web Tools**: [esphome/esp-web-tools](https://github.com/esphome/esp-web-tools) - Browser-based firmware installer
 - **Rick Astley**: For the iconic "Never Gonna Give You Up" that started it all 🎸
 
 ## 📝 License
